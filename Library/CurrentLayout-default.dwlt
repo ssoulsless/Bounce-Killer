@@ -123,7 +123,7 @@ MonoBehaviour:
   m_MinSize: {x: 709, y: 492}
   m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
-  controlID: 22
+  controlID: 59
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 201, y: 342}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
-  controlID: 27
+  controlID: 60
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,8 +168,8 @@ MonoBehaviour:
     y: 0
     width: 1124
     height: 447
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 58
+  controlID: 85
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -297,8 +297,8 @@ MonoBehaviour:
     y: 0
     width: 483
     height: 947
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -340,9 +340,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1179.9836, y: 2052.7966, z: 48.81604}
+    m_Target: {x: -3.4074755, y: 0.7504597, z: 0.6107502}
     speed: 2
-    m_Value: {x: 1179.9836, y: 2052.7966, z: 48.81604}
+    m_Value: {x: -3.4074755, y: 0.7504597, z: 0.6107502}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -393,9 +393,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0.069791526, y: 0.037400708, z: -0.0026168332, w: 0.9968568}
   m_Size:
-    m_Target: 1160.4242
+    m_Target: 13.613394
     speed: 2
-    m_Value: 1160.4242
+    m_Value: 13.613394
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -413,7 +413,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: 0.06833287, y: -0.017956024, z: 0.0012316945, w: 0.9974978}
+  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -448,23 +448,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: e63e0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 8874ffffa874ffff7675ffff8275ffff8875fffff278ffff1279ffff1679ffff1c79ffff2279ffff5079ffffc879ffffe879ffffec79fffff279fffff879ffffc87affffe87affffec7afffff27afffff87affffee7cffff0e7dffff127dffff187dffff1e7dffff4e7effff6e7effff727effff787effff7e7effff347fffff547fffff587fffff5e7fffff647ffffff47fffff1480ffffe680fffff080fffffc80ffff0083ffff4087ffff008fffff3a90ffff5890ffffec91ffff9a93ffffe693ffff3c94ffff8894ffff60a8ffff46aaffff02b5ffff60b5ffff74d4ffffe0d4ffff60d5ffff80d5ffffa8d5ffff88f1ffff06f6ffff08560000a4560000845f00006664000044680000
+      m_ExpandedIDs: 64e0ffff8ee0ffffb0e0ffffc8e0ffffe2e0fffffae0ffff14e1ffff2ce1ffff7ce1ffff5af8ffff76f8ffff94f8ffff30fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: SceneLoader
-        m_OriginalName: SceneLoader
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 26686
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 10}
       m_SearchString: 
@@ -518,14 +518,14 @@ MonoBehaviour:
   m_StartGridSize: 16
   m_LastFolders: []
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: C:\Users\doodl\Desktop\Bounce Killer\Bounce-Killer
+  m_LastProjectPath: C:\Users\doodl\Desktop\Bounce-Killer
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 7a2e0000
     m_LastClickedID: 11898
-    m_ExpandedIDs: 00000000c6400000c8400000ca400000cc400000ce400000d0400000d2400000d4400000d6400000d8400000da400000dc400000de400000e0400000e2400000e4400000
+    m_ExpandedIDs: 000000007c3e00007e3e0000803e0000823e0000843e0000863e0000883e00008a3e00008c3e00008e3e0000903e0000923e0000943e0000963e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -553,21 +553,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000c6400000c8400000cc400000ce400000d0400000d2400000d4400000d6400000d8400000da400000dc400000de400000e2400000e4400000
+    m_ExpandedIDs: ffffffff000000007c3e00007e3e0000803e0000823e0000843e0000863e0000883e00008a3e00008c3e00008e3e0000903e0000923e0000943e0000963e0000dc3e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: MainMenu
-      m_OriginalName: MainMenu
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 16702
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 11}
     m_SearchString: 
@@ -700,7 +700,7 @@ MonoBehaviour:
     fitToScreenEnabled: 0
     rotationDegree: 0
     highlightSafeAreaEnabled: 0
-    friendlyName: Samsung Galaxy S7
+    friendlyName: Samsung Galaxy S6
     networkReachability: 0
     systemLanguage: 10
 --- !u!114 &18
