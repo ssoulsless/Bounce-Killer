@@ -1,10 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 public class StartGame : MonoBehaviour
 {
-    public void StartFirstLevel()
+    [SerializeField] GameObject levelMenu;
+    [SerializeField] GameObject startMenu;
+    public void StartLevel(string sceneName)
     {
-        SceneManager.LoadScene("FirstLevel");
+        SceneManager.LoadScene(sceneName);
+    }
+    public void GoToLevelChoose()
+    {
+        startMenu.gameObject.SetActive(false);
+        levelMenu.gameObject.SetActive(true);
     }
 }

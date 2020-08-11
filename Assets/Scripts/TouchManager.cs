@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TouchManager : MonoBehaviour
 {
@@ -8,16 +7,10 @@ public class TouchManager : MonoBehaviour
     private Vector2 deltaPos;
     private GameManager gameManager;
     private int shootCount = 0;
-    [SerializeField] GameObject[] directionalLines;
-    private Transform[] linesTransform;
 
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        for (int i = 0; i<directionalLines.Length; i++)
-        {
-            linesTransform[i] = directionalLines[i].GetComponent<Transform>();
-        }
     }
     void Update()
     {

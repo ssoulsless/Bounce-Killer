@@ -55,3 +55,11 @@ Update Mode: mergeDefaultDependencies
 The following packages were added:
   com.unity.postprocessing@2.3.0
   com.unity.progrids@3.0.3-preview.4
+
+=== Tue Aug 11 15:10:23 2020
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.textmeshpro from version 3.0.0-preview.1 to 3.0.1
