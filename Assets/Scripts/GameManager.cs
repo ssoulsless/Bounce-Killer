@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI victoryMessage;
     [SerializeField] TextMeshProUGUI loseMessage;
     [SerializeField] Button restartButton;
+    [SerializeField] Button backToMenu;
     [SerializeField] TextMeshProUGUI ammoCount;
     [SerializeField] ParticleSystem victoryParticles;
     [SerializeField] GameObject projectilePrefab;
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
             victoryParticles.Play();
             ammoCount.gameObject.SetActive(false);
             restartButton.gameObject.SetActive(true);
+            backToMenu.gameObject.SetActive(true);
             isGame = false;
         }
     }
@@ -66,6 +68,7 @@ public class GameManager : MonoBehaviour
             restartButton.gameObject.SetActive(true);
             ammoCount.gameObject.SetActive(false);
             isGame = false;
+            backToMenu.gameObject.SetActive(true);
         }
     }
     public void RestartLevel()

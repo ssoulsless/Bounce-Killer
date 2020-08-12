@@ -4,7 +4,8 @@ ScriptsOnlyBuild:
     - AutoDestroy
     - EnemyDetector
     - GameManager
-    - StartGame
+    - ResizeCamera
+    - SceneNavigator
     - TouchManager
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
@@ -24,8 +25,6 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshProUGUI
-    Unity.Timeline.Editor.dll:
-    - TimelinePreferences
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -69,31 +68,35 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 12076}
+      Script: {instanceID: 11824}
     - Class: 114
-      Script: {instanceID: 12138}
+      Script: {instanceID: 11886}
     - Class: 114
-      Script: {instanceID: 12424}
+      Script: {instanceID: 12174}
     - Class: 114
-      Script: {instanceID: 12478}
+      Script: {instanceID: 12228}
     - Class: 114
-      Script: {instanceID: 12494}
+      Script: {instanceID: 12244}
     - Class: 114
-      Script: {instanceID: 13240}
+      Script: {instanceID: 12992}
     - Class: 114
-      Script: {instanceID: 13250}
+      Script: {instanceID: 13002}
     - Class: 114
-      Script: {instanceID: 14106}
+      Script: {instanceID: 13860}
     - Class: 114
-      Script: {instanceID: 14498}
+      Script: {instanceID: 14260}
     - Class: 114
-      Script: {instanceID: 14858}
+      Script: {instanceID: 14624}
     - Class: 114
-      Script: {instanceID: 14980}
+      Script: {instanceID: 14642}
     - Class: 114
-      Script: {instanceID: 15464}
+      Script: {instanceID: 14748}
     - Class: 114
-      Script: {instanceID: 15668}
+      Script: {instanceID: 15234}
+    - Class: 114
+      Script: {instanceID: 15438}
+    - Class: 114
+      Script: {instanceID: 16276}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -150,31 +153,35 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 12076}
+      Script: {instanceID: 11824}
     - Class: 114
-      Script: {instanceID: 12138}
+      Script: {instanceID: 11886}
     - Class: 114
-      Script: {instanceID: 12424}
+      Script: {instanceID: 12174}
     - Class: 114
-      Script: {instanceID: 12478}
+      Script: {instanceID: 12228}
     - Class: 114
-      Script: {instanceID: 12494}
+      Script: {instanceID: 12244}
     - Class: 114
-      Script: {instanceID: 13240}
+      Script: {instanceID: 12992}
     - Class: 114
-      Script: {instanceID: 13250}
+      Script: {instanceID: 13002}
     - Class: 114
-      Script: {instanceID: 14106}
+      Script: {instanceID: 13860}
     - Class: 114
-      Script: {instanceID: 14498}
+      Script: {instanceID: 14260}
     - Class: 114
-      Script: {instanceID: 14858}
+      Script: {instanceID: 14624}
     - Class: 114
-      Script: {instanceID: 14980}
+      Script: {instanceID: 14642}
     - Class: 114
-      Script: {instanceID: 15464}
+      Script: {instanceID: 14748}
     - Class: 114
-      Script: {instanceID: 15668}
+      Script: {instanceID: 15234}
+    - Class: 114
+      Script: {instanceID: 15438}
+    - Class: 114
+      Script: {instanceID: 16276}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -227,31 +234,31 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 12076}
+      Script: {instanceID: 11824}
     - Class: 114
-      Script: {instanceID: 12424}
+      Script: {instanceID: 12174}
     - Class: 114
-      Script: {instanceID: 12478}
+      Script: {instanceID: 12228}
     - Class: 114
-      Script: {instanceID: 13240}
+      Script: {instanceID: 12992}
     - Class: 114
-      Script: {instanceID: 13310}
+      Script: {instanceID: 13062}
     - Class: 114
-      Script: {instanceID: 14106}
+      Script: {instanceID: 13860}
     - Class: 114
-      Script: {instanceID: 14498}
+      Script: {instanceID: 14260}
     - Class: 114
-      Script: {instanceID: 14516}
+      Script: {instanceID: 14280}
     - Class: 114
-      Script: {instanceID: 14858}
+      Script: {instanceID: 14624}
     - Class: 114
-      Script: {instanceID: 14874}
+      Script: {instanceID: 14642}
     - Class: 114
-      Script: {instanceID: 14980}
+      Script: {instanceID: 14748}
     - Class: 114
-      Script: {instanceID: 15294}
+      Script: {instanceID: 15062}
     - Class: 114
-      Script: {instanceID: 15668}
+      Script: {instanceID: 15438}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -738,7 +745,7 @@ ScriptsOnlyBuild:
       Hash: 47f2ffc6853bd80be1d148e5f45feb8d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: StartGame
+    className: SceneNavigator
   - hash:
       serializedVersion: 2
       Hash: f336e086360abe49a3323e5f1583c35a
@@ -777,7 +784,7 @@ ScriptsOnlyBuild:
     className: PostProcessVolume
   - hash:
       serializedVersion: 2
-      Hash: 0704f844a2f883624e7aa9a628393be3
+      Hash: c5fa3a80d4d1242929b63f1538cd1d5c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -889,9 +896,15 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: c232a1680326602ab86a75c817697418
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ResizeCamera
   platform: 13
   scenePathNames:
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/1Level.unity
   - Assets/Scenes/2Level.unity
-  playerPath: C:/Users/doodl/Desktop/Bounce Killer/Bounce-Killer/Bouncy Killer.apk
+  playerPath: C:/Users/doodl/Desktop/Bounce-Killer/Bounce Killer.apk
