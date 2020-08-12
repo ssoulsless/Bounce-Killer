@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
          if (shootCount < maxShootCount)
          {
             ammoCount.text = "Ammo: " + (maxShootCount - shootCount);
-            clone = Instantiate(projectilePrefab, playerTransform) as GameObject;
+            clone = Instantiate(projectilePrefab, playerTransform.position, playerTransform.rotation) as GameObject;
             cloneRb = clone.GetComponent<Rigidbody>();
             cloneRb.AddForce(direction * force, ForceMode.Impulse);
          }

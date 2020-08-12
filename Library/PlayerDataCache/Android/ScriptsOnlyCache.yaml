@@ -68,15 +68,17 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11824}
+      Script: {instanceID: 11822}
     - Class: 114
-      Script: {instanceID: 11886}
+      Script: {instanceID: 11884}
     - Class: 114
-      Script: {instanceID: 12174}
+      Script: {instanceID: 12172}
     - Class: 114
-      Script: {instanceID: 12228}
+      Script: {instanceID: 12226}
     - Class: 114
-      Script: {instanceID: 12244}
+      Script: {instanceID: 12242}
+    - Class: 114
+      Script: {instanceID: 12636}
     - Class: 114
       Script: {instanceID: 12992}
     - Class: 114
@@ -95,8 +97,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 15234}
     - Class: 114
       Script: {instanceID: 15438}
-    - Class: 114
-      Script: {instanceID: 16276}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -153,15 +153,17 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11824}
+      Script: {instanceID: 11822}
     - Class: 114
-      Script: {instanceID: 11886}
+      Script: {instanceID: 11884}
     - Class: 114
-      Script: {instanceID: 12174}
+      Script: {instanceID: 12172}
     - Class: 114
-      Script: {instanceID: 12228}
+      Script: {instanceID: 12226}
     - Class: 114
-      Script: {instanceID: 12244}
+      Script: {instanceID: 12242}
+    - Class: 114
+      Script: {instanceID: 12636}
     - Class: 114
       Script: {instanceID: 12992}
     - Class: 114
@@ -180,8 +182,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 15234}
     - Class: 114
       Script: {instanceID: 15438}
-    - Class: 114
-      Script: {instanceID: 16276}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -234,11 +234,11 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11824}
+      Script: {instanceID: 11822}
     - Class: 114
-      Script: {instanceID: 12174}
+      Script: {instanceID: 12172}
     - Class: 114
-      Script: {instanceID: 12228}
+      Script: {instanceID: 12226}
     - Class: 114
       Script: {instanceID: 12992}
     - Class: 114
@@ -506,6 +506,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: RectMask2D
+  - hash:
+      serializedVersion: 2
+      Hash: c232a1680326602ab86a75c817697418
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ResizeCamera
   - hash:
       serializedVersion: 2
       Hash: 6980e81ddc615a861309d2d659cc3760
@@ -896,12 +902,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: c232a1680326602ab86a75c817697418
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ResizeCamera
   platform: 13
   scenePathNames:
   - Assets/Scenes/MainMenu.unity
