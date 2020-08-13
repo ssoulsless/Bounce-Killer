@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using TMPro.EditorUtilities;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,18 +22,53 @@ public class GameManager : MonoBehaviour
     public List<GameObject> listOfEnemies = new List<GameObject>();
     private GameObject clone;
     private Transform playerTransform;
+    private RectTransform pauseTransform;
     private Rigidbody cloneRb;
     private int destroyedCount = 0;
     public bool isGame = true;
     public bool isLast = false;
     public int maxShootCount = 5;
+    private Vector2 startTouchPos;
+    private Vector2 endTouchPos;
+    private Vector2 deltaPos;
+    private int shootCount = 0;
+    private float maxXValue;
+    private float maxYValue;
 
 
-    private void Start()
+    private void Awake()
     {
         listOfEnemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         ammoCount.text = maxShootCount.ToString();
+        pauseTransform = pauseGameButton.GetComponent<RectTransform>();
+        maxXValue = Screen.width + pauseTransform.rect.x - pauseTransform.rect.width * pauseTransform.localScale.x;
+        maxYValue = Screen.height + pauseTransform.rect.y - pauseTransform.rect.height * pauseTransform.localScale.y;
+    }
+    private void Update()
+    {
+        if (Input.touchCount != 0)
+        {
+            if (isGame)
+            {
+                Touch _touch;
+                _touch = Input.GetTouch(0);
+                if (_touch.phase == TouchPhase.Began)
+                {
+                    startTouchPos = _touch.position;
+                }
+                if (_touch.phase == TouchPhase.Ended)
+                {
+                    endTouchPos = _touch.position;
+                    deltaPos = endTouchPos - startTouchPos;
+                    if (!((endTouchPos.x >= maxXValue && endTouchPos.y > maxYValue) || (startTouchPos.x>=maxXValue && startTouchPos.y >= maxYValue)))
+                    {
+                        Shoot(deltaPos.normalized, ++shootCount);
+                    }
+                }
+            }
+
+        }
     }
     public void Victory()
     {
@@ -93,8 +131,8 @@ public class GameManager : MonoBehaviour
     }
     public void ResumeGame()
     {
-        Time.timeScale = 1;
         isGame = true;
+        Time.timeScale = 1;
         backToMenu.gameObject.SetActive(false);
         resumeGameButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);

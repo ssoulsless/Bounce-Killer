@@ -57,10 +57,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\TouchManager.cs" />
     <Compile Include="Assets\Scripts\AutoDestroy.cs" />
+    <Compile Include="Assets\Scripts\ResizeCamera.cs" />
     <Compile Include="Assets\Scripts\EnemyDetector.cs" />
     <Compile Include="Assets\Scripts\SceneNavigator.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\ResizeCamera.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
