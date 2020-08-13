@@ -1,16 +1,18 @@
 ﻿using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI victoryMessage;
-    [SerializeField] TextMeshProUGUI loseMessage;
+    [SerializeField] Text victoryMessage;
+    [SerializeField] Text loseMessage;
     [SerializeField] Button restartButton;
+    [SerializeField] Button resumeGameButton;
     [SerializeField] Button backToMenu;
-    [SerializeField] TextMeshProUGUI ammoCount;
+    [SerializeField] Button pauseGameButton;
+    [SerializeField] Text ammoCount;
+    [SerializeField] Image ammoImage;
     [SerializeField] ParticleSystem victoryParticles;
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] float force = 0.2f;
@@ -28,7 +30,7 @@ public class GameManager : MonoBehaviour
     {
         listOfEnemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
-        ammoCount.text = "Ammo: " + maxShootCount;
+        ammoCount.text = maxShootCount.ToString();
     }
     public void Victory()
     {
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
             victoryMessage.gameObject.SetActive(true);
             victoryParticles.Play();
             ammoCount.gameObject.SetActive(false);
+            ammoImage.gameObject.SetActive(false);
             restartButton.gameObject.SetActive(true);
             backToMenu.gameObject.SetActive(true);
             isGame = false;
@@ -44,21 +47,13 @@ public class GameManager : MonoBehaviour
     }
     public void Shoot(Vector2 direction, int shootCount)
     {
-         if (shootCount < maxShootCount)
+         if (shootCount <= maxShootCount && isGame)
          {
-            ammoCount.text = "Ammo: " + (maxShootCount - shootCount);
+            ammoCount.text = (maxShootCount - shootCount).ToString();
             clone = Instantiate(projectilePrefab, playerTransform.position, playerTransform.rotation) as GameObject;
             cloneRb = clone.GetComponent<Rigidbody>();
             cloneRb.AddForce(direction * force, ForceMode.Impulse);
          }
-        if (shootCount == maxShootCount)
-        {
-            isLast = true;
-            ammoCount.text = "Ammo: " + (maxShootCount - shootCount);
-            clone = Instantiate(projectilePrefab, playerTransform) as GameObject;
-            cloneRb = clone.GetComponent<Rigidbody>();
-            cloneRb.AddForce(direction * force, ForceMode.Impulse);
-        }
     }
     public void Lose()
     {
@@ -76,6 +71,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         destroyedCount = 0;
         isGame = true;
+        Time.timeScale = 1;
     }
     public int DestroyCount()
     {
@@ -85,5 +81,23 @@ public class GameManager : MonoBehaviour
     public void RemoveEnemies(GameObject enemy)
     {
         listOfEnemies.Remove(enemy);
+    }
+    public void PauseGame()
+    {
+        isGame = false;
+        backToMenu.gameObject.SetActive(true);
+        resumeGameButton.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+        Time.timeScale = 0;
+        pauseGameButton.gameObject.SetActive(false);
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        isGame = true;
+        backToMenu.gameObject.SetActive(false);
+        resumeGameButton.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(false);
+        pauseGameButton.gameObject.SetActive(true);
     }
 }

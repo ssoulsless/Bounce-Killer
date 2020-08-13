@@ -24,7 +24,6 @@ ScriptsOnlyBuild:
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
-    - TMPro.TextMeshProUGUI
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -86,10 +85,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13860}
     - Class: 114
-      Script: {instanceID: 14260}
-    - Class: 114
-      Script: {instanceID: 14624}
-    - Class: 114
       Script: {instanceID: 14642}
     - Class: 114
       Script: {instanceID: 14748}
@@ -104,8 +99,6 @@ ScriptsOnlyBuild:
     - Class: 134
       Script: {instanceID: 0}
     - Class: 135
-      Script: {instanceID: 0}
-    - Class: 136
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -171,10 +164,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13860}
     - Class: 114
-      Script: {instanceID: 14260}
-    - Class: 114
-      Script: {instanceID: 14624}
-    - Class: 114
       Script: {instanceID: 14642}
     - Class: 114
       Script: {instanceID: 14748}
@@ -189,8 +178,6 @@ ScriptsOnlyBuild:
     - Class: 134
       Script: {instanceID: 0}
     - Class: 135
-      Script: {instanceID: 0}
-    - Class: 136
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -249,8 +236,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 14260}
     - Class: 114
       Script: {instanceID: 14280}
-    - Class: 114
-      Script: {instanceID: 14624}
     - Class: 114
       Script: {instanceID: 14642}
     - Class: 114
@@ -790,7 +775,7 @@ ScriptsOnlyBuild:
     className: PostProcessVolume
   - hash:
       serializedVersion: 2
-      Hash: c5fa3a80d4d1242929b63f1538cd1d5c
+      Hash: b8cd3aa6c0be84d0e78ee8d84c848609
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
