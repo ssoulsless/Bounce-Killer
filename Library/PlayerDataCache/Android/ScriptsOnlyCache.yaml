@@ -6,7 +6,6 @@ ScriptsOnlyBuild:
     - GameManager
     - ResizeCamera
     - SceneNavigator
-    - TouchManager
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Tilemap.Editor.dll:
@@ -19,11 +18,6 @@ ScriptsOnlyBuild:
     - Unity.DeviceSimulator.SimulatorWindow
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
-    Unity.TextMeshPro.dll:
-    - TMPro.TMP_FontAsset
-    - TMPro.TMP_Settings
-    - TMPro.TMP_SpriteAsset
-    - TMPro.TMP_StyleSheet
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -62,14 +56,16 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
       Script: {instanceID: 11822}
-    - Class: 114
-      Script: {instanceID: 11884}
     - Class: 114
       Script: {instanceID: 12172}
     - Class: 114
@@ -93,6 +89,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 15438}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 120
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
@@ -142,6 +140,10 @@ ScriptsOnlyBuild:
     - Class: 65
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -210,11 +212,13 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
-    - Class: 49
-      Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -229,19 +233,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12992}
     - Class: 114
-      Script: {instanceID: 13062}
-    - Class: 114
       Script: {instanceID: 13860}
-    - Class: 114
-      Script: {instanceID: 14260}
-    - Class: 114
-      Script: {instanceID: 14280}
     - Class: 114
       Script: {instanceID: 14642}
     - Class: 114
       Script: {instanceID: 14748}
-    - Class: 114
-      Script: {instanceID: 15062}
     - Class: 114
       Script: {instanceID: 15438}
     - Class: 115
@@ -293,12 +289,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SelectionCaret
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: TouchManager
   - hash:
       serializedVersion: 2
       Hash: 87ff43d2baf3385cba327d8f803a4ebb
@@ -379,7 +369,7 @@ ScriptsOnlyBuild:
     className: Image
   - hash:
       serializedVersion: 2
-      Hash: abf99cedd742975d3c011219e11803b9
+      Hash: 9f6faf0ddb65e31bf7222c778fad4c51
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AutoDestroy
@@ -775,7 +765,7 @@ ScriptsOnlyBuild:
     className: PostProcessVolume
   - hash:
       serializedVersion: 2
-      Hash: b8cd3aa6c0be84d0e78ee8d84c848609
+      Hash: b89bc573aed80368b38224ca358dd45b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager

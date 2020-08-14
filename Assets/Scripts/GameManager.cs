@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro.EditorUtilities;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,15 +17,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] ParticleSystem victoryParticles;
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] float force = 0.2f;
-    public List<GameObject> listOfEnemies = new List<GameObject>();
+
     private GameObject clone;
-    private Transform playerTransform;
     private RectTransform pauseTransform;
+    private Transform startThrowingPosition;
     private Rigidbody cloneRb;
+    private AudioSource loseSound;
+    private AudioSource victorySound;
+    private AudioSource gameMusic;
+    private AudioSource throwingSound;
+    private LineRenderer preDirection;
     private int destroyedCount = 0;
-    public bool isGame = true;
-    public bool isLast = false;
-    public int maxShootCount = 5;
     private Vector2 startTouchPos;
     private Vector2 endTouchPos;
     private Vector2 deltaPos;
@@ -35,15 +35,25 @@ public class GameManager : MonoBehaviour
     private float maxXValue;
     private float maxYValue;
 
+    public bool isGame = true;
+    public bool isLast = false;
+    public int maxShootCount = 5;
+    public List<GameObject> listOfEnemies = new List<GameObject>();
+
 
     private void Awake()
     {
         listOfEnemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
-        playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         ammoCount.text = maxShootCount.ToString();
         pauseTransform = pauseGameButton.GetComponent<RectTransform>();
         maxXValue = Screen.width + pauseTransform.rect.x - pauseTransform.rect.width * pauseTransform.localScale.x;
         maxYValue = Screen.height + pauseTransform.rect.y - pauseTransform.rect.height * pauseTransform.localScale.y;
+        victorySound = victoryMessage.GetComponent<AudioSource>();
+        loseSound = loseMessage.GetComponent<AudioSource>();
+        gameMusic = GameObject.Find("Audio Manager").GetComponent<AudioSource>();
+        throwingSound = GameObject.Find("Player").GetComponent<AudioSource>();
+        preDirection = GetComponent<LineRenderer>();
+        startThrowingPosition = GameObject.Find("Start Position").GetComponent<Transform>();
     }
     private void Update()
     {
@@ -53,21 +63,42 @@ public class GameManager : MonoBehaviour
             {
                 Touch _touch;
                 _touch = Input.GetTouch(0);
+                preDirection.SetPosition(0, startThrowingPosition.position); 
                 if (_touch.phase == TouchPhase.Began)
                 {
                     startTouchPos = _touch.position;
+                }
+                if (_touch.phase == TouchPhase.Moved) 
+                {
+                    endTouchPos = _touch.position;
+                    if (!((endTouchPos.x >= maxXValue && endTouchPos.y > maxYValue) || (startTouchPos.x >= maxXValue && startTouchPos.y >= maxYValue)))
+                    {
+                        deltaPos = endTouchPos - startTouchPos;
+                        deltaPos.Normalize();
+                        preDirection.SetPosition(1, startThrowingPosition.position + new Vector3(deltaPos.x * 5, deltaPos.y * 5, 0));
+                    }
+                    else
+                    {
+                        startTouchPos = Vector2.zero;
+                        endTouchPos = Vector2.zero;
+                        deltaPos = Vector2.zero;
+                        preDirection.SetPosition(1, startThrowingPosition.position);
+                    }
                 }
                 if (_touch.phase == TouchPhase.Ended)
                 {
                     endTouchPos = _touch.position;
                     deltaPos = endTouchPos - startTouchPos;
-                    if (!((endTouchPos.x >= maxXValue && endTouchPos.y > maxYValue) || (startTouchPos.x>=maxXValue && startTouchPos.y >= maxYValue)))
+                    if (deltaPos != Vector2.zero)
                     {
-                        Shoot(deltaPos.normalized, ++shootCount);
+                        preDirection.SetPosition(1, startThrowingPosition.position);
+                        if (!((endTouchPos.x >= maxXValue && endTouchPos.y > maxYValue) || (startTouchPos.x >= maxXValue && startTouchPos.y >= maxYValue)))
+                        {
+                            Shoot(deltaPos.normalized, ++shootCount);
+                        }
                     }
                 }
             }
-
         }
     }
     public void Victory()
@@ -80,7 +111,10 @@ public class GameManager : MonoBehaviour
             ammoImage.gameObject.SetActive(false);
             restartButton.gameObject.SetActive(true);
             backToMenu.gameObject.SetActive(true);
+            pauseGameButton.gameObject.SetActive(false);
             isGame = false;
+            victorySound.Play();
+            gameMusic.Stop();
         }
     }
     public void Shoot(Vector2 direction, int shootCount)
@@ -88,7 +122,8 @@ public class GameManager : MonoBehaviour
          if (shootCount <= maxShootCount && isGame)
          {
             ammoCount.text = (maxShootCount - shootCount).ToString();
-            clone = Instantiate(projectilePrefab, playerTransform.position, playerTransform.rotation) as GameObject;
+            clone = Instantiate(projectilePrefab, startThrowingPosition.position, startThrowingPosition.rotation) as GameObject;
+            throwingSound.Play();
             cloneRb = clone.GetComponent<Rigidbody>();
             cloneRb.AddForce(direction * force, ForceMode.Impulse);
          }
@@ -100,8 +135,11 @@ public class GameManager : MonoBehaviour
             loseMessage.gameObject.SetActive(true);
             restartButton.gameObject.SetActive(true);
             ammoCount.gameObject.SetActive(false);
-            isGame = false;
+            pauseGameButton.gameObject.SetActive(false);
             backToMenu.gameObject.SetActive(true);
+            isGame = false;
+            loseSound.Play();
+            gameMusic.Stop();
         }
     }
     public void RestartLevel()
@@ -131,11 +169,16 @@ public class GameManager : MonoBehaviour
     }
     public void ResumeGame()
     {
-        isGame = true;
+        StartCoroutine(delayResume());
         Time.timeScale = 1;
         backToMenu.gameObject.SetActive(false);
         resumeGameButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
         pauseGameButton.gameObject.SetActive(true);
+    }
+    public IEnumerator delayResume ()
+    {
+        yield return new WaitForSeconds(0.5f);
+        isGame = true;
     }
 }

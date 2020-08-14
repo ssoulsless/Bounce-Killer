@@ -2,29 +2,39 @@
 
 public class AutoDestroy : MonoBehaviour
 {
-    private int bounces = 0;
-    [SerializeField] int maxBounceCount;
-    private Component enemyDetector = null;
     [SerializeField] GameManager gameManager;
-    void Start()
+    [SerializeField] int maxBounceCount;
+
+    private Component enemyDetector = null;
+    private AudioSource deathSound;
+    private AudioSource bounceSound;
+    private int bounces = 0;
+
+    void Awake()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        deathSound = GameObject.Find("Enemies").GetComponent<AudioSource>();
+        bounceSound = this.GetComponent<AudioSource>();
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (++bounces >= maxBounceCount) 
+        if (!(collision.gameObject.GetComponent<EnemyDetector>()))
         {
-            Destroy(gameObject);
-            bounces = 0;
-            if (gameManager.DestroyCount() == gameManager.maxShootCount)
+            bounceSound.Play();
+            if (++bounces >= maxBounceCount)
             {
-                if (gameManager.listOfEnemies.Count <= 0)
+                Destroy(gameObject);
+                bounces = 0;
+                if (gameManager.DestroyCount() == gameManager.maxShootCount)
                 {
-                    gameManager.Victory();
-                }
-                else
-                {
-                    gameManager.Lose();
+                    if (gameManager.listOfEnemies.Count <= 0)
+                    {
+                        gameManager.Victory();
+                    }
+                    else
+                    {
+                        gameManager.Lose();
+                    }
                 }
             }
         }
@@ -34,6 +44,7 @@ public class AutoDestroy : MonoBehaviour
         enemyDetector = other.gameObject.GetComponent<EnemyDetector>();
         if (enemyDetector!=null)
         {
+            deathSound.Play();
             Destroy(other.gameObject);
             gameManager.RemoveEnemies(other.gameObject);
             if (gameManager.listOfEnemies.Count <= 0)

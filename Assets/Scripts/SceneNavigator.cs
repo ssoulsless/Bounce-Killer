@@ -14,4 +14,9 @@ public class SceneNavigator : MonoBehaviour
         levelMenu.gameObject.SetActive(true);
         Time.timeScale = 1;
     }
+    public void GoBackToMenu()
+    {
+        startMenu.gameObject.SetActive(true);
+        levelMenu.gameObject.SetActive(false);
+    }
 }
