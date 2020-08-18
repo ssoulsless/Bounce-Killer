@@ -20,6 +20,8 @@ public class LevelManager : MonoBehaviour
     public void CompleteLevel()
     {
         levelNum++;
+        PlayerPrefs.SetInt(key, levelNum);
+        PlayerPrefs.Save();
     }
     public int GetLevelNum()
     {

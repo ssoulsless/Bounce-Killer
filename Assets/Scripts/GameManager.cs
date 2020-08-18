@@ -13,10 +13,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button resumeGameButton;
     [SerializeField] Button backToMenu;
     [SerializeField] Button pauseGameButton;
+    [SerializeField] Button nextLevelButton;
 
     [SerializeField] Text ammoCount;
     [SerializeField] Image ammoImage;
     [SerializeField] ParticleSystem victoryParticles;
+    [SerializeField] ParticleSystem deathParticles;
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] float force = 0.2f;
 
@@ -124,6 +126,7 @@ public class GameManager : MonoBehaviour
             isGame = false;
             victorySound.Play();
             gameMusic.Stop();
+            nextLevelButton.gameObject.SetActive(true);
             if (currentLevelNum == levelManager.GetLevelNum())
             {
                 levelManager.CompleteLevel();
@@ -194,5 +197,15 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         isGame = true;
     }
-    
+    public void PlayDeathParticles(GameObject other)
+    {
+        deathParticles.transform.position = other.transform.position;
+        deathParticles.Play();
+    }
+    public void GoToNextLevel()
+    {
+        int sceneNumber = SceneManager.GetActiveScene().buildIndex;
+        sceneNumber++;
+        SceneManager.LoadScene(sceneNumber);
+    }   
 }

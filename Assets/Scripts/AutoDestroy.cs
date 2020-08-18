@@ -44,6 +44,7 @@ public class AutoDestroy : MonoBehaviour
         enemyDetector = other.gameObject.GetComponent<EnemyDetector>();
         if (enemyDetector!=null)
         {
+            gameManager.PlayDeathParticles(other.gameObject);
             deathSound.Play();
             Destroy(other.gameObject);
             gameManager.RemoveEnemies(other.gameObject);
