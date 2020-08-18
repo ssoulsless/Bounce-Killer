@@ -8,10 +8,12 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] Text victoryMessage;
     [SerializeField] Text loseMessage;
+
     [SerializeField] Button restartButton;
     [SerializeField] Button resumeGameButton;
     [SerializeField] Button backToMenu;
     [SerializeField] Button pauseGameButton;
+
     [SerializeField] Text ammoCount;
     [SerializeField] Image ammoImage;
     [SerializeField] ParticleSystem victoryParticles;
@@ -22,10 +24,15 @@ public class GameManager : MonoBehaviour
     private RectTransform pauseTransform;
     private Transform startThrowingPosition;
     private Rigidbody cloneRb;
+
+    private LevelManager levelManager;
+    public int currentLevelNum;
+
     private AudioSource loseSound;
     private AudioSource victorySound;
     private AudioSource gameMusic;
     private AudioSource throwingSound;
+
     private LineRenderer preDirection;
     private int destroyedCount = 0;
     private Vector2 startTouchPos;
@@ -43,6 +50,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         listOfEnemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
         ammoCount.text = maxShootCount.ToString();
         pauseTransform = pauseGameButton.GetComponent<RectTransform>();
@@ -57,6 +65,7 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        
         if (Input.touchCount != 0)
         {
             if (isGame)
@@ -115,6 +124,10 @@ public class GameManager : MonoBehaviour
             isGame = false;
             victorySound.Play();
             gameMusic.Stop();
+            if (currentLevelNum == levelManager.GetLevelNum())
+            {
+                levelManager.CompleteLevel();
+            }
         }
     }
     public void Shoot(Vector2 direction, int shootCount)
@@ -181,4 +194,5 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         isGame = true;
     }
+    
 }

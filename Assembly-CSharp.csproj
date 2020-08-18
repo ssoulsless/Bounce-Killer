@@ -61,6 +61,8 @@
     <Compile Include="Assets\Scripts\EnemyDetector.cs" />
     <Compile Include="Assets\Scripts\SceneNavigator.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\CheckForAvailableLevels.cs" />
+    <Compile Include="Assets\Scripts\LevelManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
