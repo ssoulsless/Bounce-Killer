@@ -185,14 +185,14 @@ public class GameManager : MonoBehaviour
     }
     public void ResumeGame()
     {
-        StartCoroutine(delayResume());
+        StartCoroutine(DelayResume());
         Time.timeScale = 1;
         backToMenu.gameObject.SetActive(false);
         resumeGameButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
         pauseGameButton.gameObject.SetActive(true);
     }
-    public IEnumerator delayResume ()
+    public IEnumerator DelayResume ()
     {
         yield return new WaitForSeconds(0.5f);
         isGame = true;

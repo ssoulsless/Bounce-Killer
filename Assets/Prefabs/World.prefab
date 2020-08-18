@@ -911,6 +911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelMenu: {fileID: 0}
   startMenu: {fileID: 0}
+  settingsMenu: {fileID: 0}
 --- !u!120 &2128333838741032640
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -6465,7 +6466,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2128333839128653596}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -518, y: -1318, z: 0}
+  m_LocalPosition: {x: -518, y: -1318, z: -0.00999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2128333839954863455}
@@ -6980,6 +6981,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2128333839375661261}
   - component: {fileID: 2128333839375661262}
+  - component: {fileID: 7090722808404946992}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -7097,6 +7099,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7090722808404946992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128333839375661260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e201fcc65f9764485ff882957f30f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectSources:
+  - {fileID: 2128333839183613592}
+  - {fileID: 2128333838438281518}
+  - {fileID: 2128333840112350286}
+  - {fileID: 2128333838735399706}
+  - {fileID: 2128333839110040749}
 --- !u!1 &2128333839537018587
 GameObject:
   m_ObjectHideFlags: 0

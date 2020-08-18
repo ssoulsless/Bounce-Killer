@@ -57,12 +57,15 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\TouchManager.cs" />
     <Compile Include="Assets\Scripts\AutoDestroy.cs" />
+    <Compile Include="Assets\Scripts\CheckForAvailableLevels.cs" />
     <Compile Include="Assets\Scripts\ResizeCamera.cs" />
     <Compile Include="Assets\Scripts\EnemyDetector.cs" />
+    <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\SceneNavigator.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\CheckForAvailableLevels.cs" />
-    <Compile Include="Assets\Scripts\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\SettingsManager.cs" />
+    <Compile Include="Assets\Scripts\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\VolumeSetuper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

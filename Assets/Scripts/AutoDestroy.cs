@@ -15,6 +15,10 @@ public class AutoDestroy : MonoBehaviour
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         deathSound = GameObject.Find("Enemies").GetComponent<AudioSource>();
         bounceSound = this.GetComponent<AudioSource>();
+        if (PlayerPrefs.HasKey("effects"))
+        {
+            bounceSound.volume = PlayerPrefs.GetFloat("effects");
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
