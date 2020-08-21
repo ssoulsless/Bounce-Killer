@@ -6,9 +6,12 @@ public class AutoDestroy : MonoBehaviour
     [SerializeField] int maxBounceCount;
 
     private Component enemyDetector = null;
+    private Component spikeDetector = null;
     private AudioSource deathSound;
     private AudioSource bounceSound;
     private int bounces = 0;
+
+    private bool isSpiked = false;
 
     void Awake()
     {
@@ -22,14 +25,13 @@ public class AutoDestroy : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (!(collision.gameObject.GetComponent<EnemyDetector>()))
+        if (!((collision.gameObject.GetComponent<EnemyDetector>())||(collision.gameObject.GetComponent<SpikeDetector>())))
         {
             bounceSound.Play();
             if (++bounces >= maxBounceCount)
             {
-                Destroy(gameObject);
                 bounces = 0;
-                if (gameManager.DestroyCount() == gameManager.maxShootCount)
+                if (gameManager.DestroyCount(this.gameObject) == gameManager.maxShootCount)
                 {
                     if (gameManager.listOfEnemies.Count <= 0)
                     {
@@ -46,6 +48,7 @@ public class AutoDestroy : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         enemyDetector = other.gameObject.GetComponent<EnemyDetector>();
+        spikeDetector = other.gameObject.GetComponent<SpikeDetector>();
         if (enemyDetector!=null)
         {
             gameManager.PlayDeathParticles(other.gameObject);
@@ -55,6 +58,21 @@ public class AutoDestroy : MonoBehaviour
             if (gameManager.listOfEnemies.Count <= 0)
             {
                 gameManager.Victory();
+            }
+        }
+        if ((spikeDetector!=null) && !(isSpiked))
+        {
+            isSpiked = true;
+            if (gameManager.DestroyCount(this.gameObject) == gameManager.maxShootCount)
+            {
+                if (gameManager.listOfEnemies.Count <= 0)
+                {
+                    gameManager.Victory();
+                }
+                else
+                {
+                    gameManager.Lose();
+                }
             }
         }
     }

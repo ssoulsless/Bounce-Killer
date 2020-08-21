@@ -60,12 +60,14 @@
     <Compile Include="Assets\Scripts\CheckForAvailableLevels.cs" />
     <Compile Include="Assets\Scripts\ResizeCamera.cs" />
     <Compile Include="Assets\Scripts\EnemyDetector.cs" />
-    <Compile Include="Assets\Scripts\LevelManager.cs" />
-    <Compile Include="Assets\Scripts\SceneNavigator.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\SettingsManager.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\SettingsManager.cs" />
+    <Compile Include="Assets\Scripts\SceneNavigator.cs" />
     <Compile Include="Assets\Scripts\VolumeSetuper.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\LevelButtonsBounds.cs" />
+    <Compile Include="Assets\Scripts\SpikeDetector.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -611,6 +613,10 @@
       <Project>{7469256D-1062-3348-0E47-852D8296FDD1}</Project>
       <Name>Unity.Timeline.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="UnityEngine.Monetization.csproj">
+      <Project>{CC5AD5DC-BE27-180F-05A0-D32614A97027}</Project>
+      <Name>UnityEngine.Monetization</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.2D.Animation.Runtime.csproj">
       <Project>{FB3938E6-C23A-23BD-5127-69B501AEE7DC}</Project>
       <Name>Unity.2D.Animation.Runtime</Name>
@@ -626,6 +632,10 @@
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
       <Project>{0ADA3C40-2E28-88A7-1374-D079FBB486F9}</Project>
       <Name>Unity.VSCode.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Advertisements.csproj">
+      <Project>{AF83F2BB-F1F6-66DC-9AF1-68A2AF5544BB}</Project>
+      <Name>UnityEngine.Advertisements</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.2D.SpriteShape.Editor.csproj">
       <Project>{362CAC7E-536F-D323-4F90-57A1654AA4FC}</Project>

@@ -165,10 +165,10 @@ public class GameManager : MonoBehaviour
         isGame = true;
         Time.timeScale = 1;
     }
-    public int DestroyCount()
+    public int DestroyCount(GameObject objecToDestroy)
     {
-        destroyedCount++;
-        return destroyedCount;
+        Destroy(objecToDestroy);
+        return ++destroyedCount;
     }
     public void RemoveEnemies(GameObject enemy)
     {

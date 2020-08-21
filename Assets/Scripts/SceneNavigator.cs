@@ -6,9 +6,18 @@ public class SceneNavigator : MonoBehaviour
     [SerializeField] GameObject startMenu;
     [SerializeField] GameObject settingsMenu;
 
-    public void StartLevel(string sceneName)
+    private LevelManager levelManager;
+
+    private void Awake()
     {
-        SceneManager.LoadScene(sceneName);
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+    }
+    public void StartLevel(int sceneId)
+    {
+        if (levelManager.GetLevelNum() >= sceneId)
+        {
+            SceneManager.LoadScene(sceneId);
+        }
     }
     public void GoToLevelChoose()
     {
