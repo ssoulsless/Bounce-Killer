@@ -5,13 +5,15 @@ public class AutoDestroy : MonoBehaviour
     [SerializeField] GameManager gameManager;
     [SerializeField] int maxBounceCount;
 
-    private Component enemyDetector = null;
-    private Component spikeDetector = null;
+    private EnemyDetector enemyDetector = null;
+    private SpikeDetector spikeDetector = null;
+    private LaserDetector laserDetector = null;
     private AudioSource deathSound;
     private AudioSource bounceSound;
     private int bounces = 0;
 
     private bool isSpiked = false;
+    private bool isLasered = false;
 
     void Awake()
     {
@@ -25,7 +27,7 @@ public class AutoDestroy : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (!((collision.gameObject.GetComponent<EnemyDetector>())||(collision.gameObject.GetComponent<SpikeDetector>())))
+        if (!((collision.gameObject.GetComponent<EnemyDetector>())||(collision.gameObject.GetComponent<SpikeDetector>())||(collision.gameObject.GetComponent<LaserDetector>())))
         {
             bounceSound.Play();
             if (++bounces >= maxBounceCount)
@@ -49,6 +51,8 @@ public class AutoDestroy : MonoBehaviour
     {
         enemyDetector = other.gameObject.GetComponent<EnemyDetector>();
         spikeDetector = other.gameObject.GetComponent<SpikeDetector>();
+        laserDetector = other.gameObject.GetComponent<LaserDetector>();
+        
         if (enemyDetector!=null)
         {
             gameManager.PlayDeathParticles(other.gameObject);
@@ -63,6 +67,23 @@ public class AutoDestroy : MonoBehaviour
         if ((spikeDetector!=null) && !(isSpiked))
         {
             isSpiked = true;
+            bounces = 0;
+            if (gameManager.DestroyCount(this.gameObject) == gameManager.maxShootCount)
+            {
+                if (gameManager.listOfEnemies.Count <= 0)
+                {
+                    gameManager.Victory();
+                }
+                else
+                {
+                    gameManager.Lose();
+                }
+            }
+        }
+        if ((laserDetector!= null) && !(isLasered))
+        {
+            isLasered = true;
+            bounces = 0;
             if (gameManager.DestroyCount(this.gameObject) == gameManager.maxShootCount)
             {
                 if (gameManager.listOfEnemies.Count <= 0)

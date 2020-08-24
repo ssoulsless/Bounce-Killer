@@ -9,23 +9,32 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text victoryMessage;
     [SerializeField] Text loseMessage;
 
+    private AdManager adManager;
+
     [SerializeField] Button restartButton;
     [SerializeField] Button resumeGameButton;
     [SerializeField] Button backToMenu;
     [SerializeField] Button pauseGameButton;
     [SerializeField] Button nextLevelButton;
+    [SerializeField] Button watchAdButton;
 
     [SerializeField] Text ammoCount;
     [SerializeField] Image ammoImage;
     [SerializeField] ParticleSystem victoryParticles;
     [SerializeField] ParticleSystem deathParticles;
     [SerializeField] GameObject projectilePrefab;
+    [SerializeField] GameObject Lasers;
     [SerializeField] float force = 0.2f;
+    [SerializeField] float laserDelay = 2f;
+    [SerializeField] float size = 4f;
 
     private GameObject clone;
     private RectTransform pauseTransform;
     private Transform startThrowingPosition;
     private Rigidbody cloneRb;
+
+    private int gamesWithoutAd;
+    private string adCount = "gamesWithoutAd";
 
     private LevelManager levelManager;
     public int currentLevelNum;
@@ -52,6 +61,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        adManager = GameObject.Find("AdManager").GetComponent<AdManager>();
+        if (PlayerPrefs.HasKey(adCount)) gamesWithoutAd = PlayerPrefs.GetInt(adCount);
+        else gamesWithoutAd = 0;
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         listOfEnemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
         ammoCount.text = maxShootCount.ToString();
@@ -64,6 +76,8 @@ public class GameManager : MonoBehaviour
         throwingSound = GameObject.Find("Player").GetComponent<AudioSource>();
         preDirection = GetComponent<LineRenderer>();
         startThrowingPosition = GameObject.Find("Start Position").GetComponent<Transform>();
+        if (currentLevelNum>=20)
+        InvokeRepeating("LaserActivating", 0.5f, laserDelay);
     }
     private void Update()
     {
@@ -86,7 +100,7 @@ public class GameManager : MonoBehaviour
                     {
                         deltaPos = endTouchPos - startTouchPos;
                         deltaPos.Normalize();
-                        preDirection.SetPosition(1, startThrowingPosition.position + new Vector3(deltaPos.x * 5, deltaPos.y * 5, 0));
+                        preDirection.SetPosition(1, startThrowingPosition.position + new Vector3(deltaPos.x * size, deltaPos.y * size, 0));
                     }
                     else
                     {
@@ -131,6 +145,7 @@ public class GameManager : MonoBehaviour
             {
                 levelManager.CompleteLevel();
             }
+            GameCountWithoutAd();
         }
     }
     public void Shoot(Vector2 direction, int shootCount)
@@ -151,11 +166,14 @@ public class GameManager : MonoBehaviour
             loseMessage.gameObject.SetActive(true);
             restartButton.gameObject.SetActive(true);
             ammoCount.gameObject.SetActive(false);
+            ammoImage.gameObject.SetActive(false);
             pauseGameButton.gameObject.SetActive(false);
             backToMenu.gameObject.SetActive(true);
             isGame = false;
             loseSound.Play();
             gameMusic.Stop();
+            watchAdButton.gameObject.SetActive(true);
+            GameCountWithoutAd();
         }
     }
     public void RestartLevel()
@@ -164,10 +182,11 @@ public class GameManager : MonoBehaviour
         destroyedCount = 0;
         isGame = true;
         Time.timeScale = 1;
+        GameCountWithoutAd();
     }
-    public int DestroyCount(GameObject objecToDestroy)
+    public int DestroyCount(GameObject objectToDestroy)
     {
-        Destroy(objecToDestroy);
+        Destroy(objectToDestroy);
         return ++destroyedCount;
     }
     public void RemoveEnemies(GameObject enemy)
@@ -191,6 +210,9 @@ public class GameManager : MonoBehaviour
         resumeGameButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
         pauseGameButton.gameObject.SetActive(true);
+        loseMessage.gameObject.SetActive(false);
+        ammoCount.gameObject.SetActive(true);
+        ammoImage.gameObject.SetActive(true);
     }
     public IEnumerator DelayResume ()
     {
@@ -208,4 +230,42 @@ public class GameManager : MonoBehaviour
         sceneNumber++;
         SceneManager.LoadScene(sceneNumber);
     }   
+    private void LaserActivating()
+    {
+        if (Lasers.gameObject.activeSelf)
+        {
+            Lasers.SetActive(false);
+        }
+        else
+        {
+            Lasers.gameObject.SetActive(true);
+        }
+    }
+    public void RewardForWatchingAd()
+    {
+        if (shootCount==maxShootCount)
+        {
+            shootCount--;
+            ResumeGame();
+        }
+        else
+        {
+            maxShootCount++;
+        }
+    }
+    private void GameCountWithoutAd()
+    {
+        gamesWithoutAd++;
+        if (gamesWithoutAd < 7)
+        {
+            PlayerPrefs.SetInt(adCount, gamesWithoutAd);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            PlayerPrefs.SetInt(adCount, 0);
+            PlayerPrefs.Save();
+            adManager.ShowStandartVideoAd();
+        }
+    }
 }

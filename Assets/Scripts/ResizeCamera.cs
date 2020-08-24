@@ -13,5 +13,9 @@ public class ResizeCamera : MonoBehaviour
         x = Screen.height / x;
         x *= 120;
         _camera.orthographicSize = x / 200;
+        if (_camera.orthographicSize >= 12 )
+        {
+            _camera.orthographicSize = 12;
+        }
     }
 }
