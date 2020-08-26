@@ -7,10 +7,12 @@ public class SceneNavigator : MonoBehaviour
     [SerializeField] GameObject settingsMenu;
 
     private LevelManager levelManager;
+    private GameManager gameManager;
 
     private void Awake()
     {
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
     public void StartLevel(int sceneId)
     {
@@ -30,6 +32,7 @@ public class SceneNavigator : MonoBehaviour
         startMenu.SetActive(true);
         levelMenu.SetActive(false);
         settingsMenu.SetActive(false);
+        gameManager.isRewarded = false;
     }
     public void GoToSettingsMenu()
     {

@@ -19,7 +19,7 @@ public class AdManager : MonoBehaviour, IUnityAdsListener
     {
         if (Advertisement.IsReady())
         {
-            Advertisement.Show("Video");
+            Advertisement.Show("video");
         }
     }
     void ShowRewardedVideo()
@@ -41,14 +41,17 @@ public class AdManager : MonoBehaviour, IUnityAdsListener
         if (showResult == ShowResult.Finished)
         {
             gameManager.RewardForWatchingAd();
+            Debug.Log("finished");
         }
         else if (showResult == ShowResult.Skipped)
         {
             gameManager.RewardForWatchingAd();
+            Debug.Log("skipped");
         }
         else if (showResult == ShowResult.Failed)
         {
             gameManager.RewardForWatchingAd();
+            Debug.Log("errored");
         }
     }
 

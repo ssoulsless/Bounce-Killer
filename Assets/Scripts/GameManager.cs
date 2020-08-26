@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button pauseGameButton;
     [SerializeField] Button nextLevelButton;
     [SerializeField] Button watchAdButton;
+    [SerializeField] Image screenFadeImage;
 
     [SerializeField] Text ammoCount;
     [SerializeField] Image ammoImage;
@@ -53,31 +54,46 @@ public class GameManager : MonoBehaviour
     private float maxXValue;
     private float maxYValue;
 
-    public bool isGame = true;
+    public bool isGame = false;
     public bool isLast = false;
     public int maxShootCount = 5;
+    public bool isRewarded;
+
     public List<GameObject> listOfEnemies = new List<GameObject>();
 
 
     private void Awake()
     {
-        adManager = GameObject.Find("AdManager").GetComponent<AdManager>();
+        isRewarded = false;
+
+        StartCoroutine(DelayResume());
+
         if (PlayerPrefs.HasKey(adCount)) gamesWithoutAd = PlayerPrefs.GetInt(adCount);
-        else gamesWithoutAd = 0;
-        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        else { gamesWithoutAd = 0; PlayerPrefs.SetInt(adCount, gamesWithoutAd); PlayerPrefs.Save(); }
+
         listOfEnemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+
         ammoCount.text = maxShootCount.ToString();
-        pauseTransform = pauseGameButton.GetComponent<RectTransform>();
-        maxXValue = Screen.width + pauseTransform.rect.x - pauseTransform.rect.width * pauseTransform.localScale.x;
-        maxYValue = Screen.height + pauseTransform.rect.y - pauseTransform.rect.height * pauseTransform.localScale.y;
+
         victorySound = victoryMessage.GetComponent<AudioSource>();
         loseSound = loseMessage.GetComponent<AudioSource>();
+        pauseTransform = pauseGameButton.GetComponent<RectTransform>();
+        preDirection = GetComponent<LineRenderer>();
+
+        maxXValue = Screen.width + pauseTransform.rect.x - pauseTransform.rect.width * pauseTransform.localScale.x;
+        maxYValue = Screen.height + pauseTransform.rect.y - pauseTransform.rect.height * pauseTransform.localScale.y;
+
+
         gameMusic = GameObject.Find("Audio Manager").GetComponent<AudioSource>();
         throwingSound = GameObject.Find("Player").GetComponent<AudioSource>();
-        preDirection = GetComponent<LineRenderer>();
         startThrowingPosition = GameObject.Find("Start Position").GetComponent<Transform>();
+        adManager = GameObject.Find("AdManager").GetComponent<AdManager>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+
+
         if (currentLevelNum>=20)
         InvokeRepeating("LaserActivating", 0.5f, laserDelay);
+
     }
     private void Update()
     {
@@ -131,15 +147,17 @@ public class GameManager : MonoBehaviour
         if (isGame)
         {
             victoryMessage.gameObject.SetActive(true);
-            victoryParticles.Play();
-            ammoCount.gameObject.SetActive(false);
-            ammoImage.gameObject.SetActive(false);
             restartButton.gameObject.SetActive(true);
             backToMenu.gameObject.SetActive(true);
-            pauseGameButton.gameObject.SetActive(false);
-            isGame = false;
+
+            victoryParticles.Play();
             victorySound.Play();
             gameMusic.Stop();
+
+            ammoCount.gameObject.SetActive(false);
+            ammoImage.gameObject.SetActive(false);
+            pauseGameButton.gameObject.SetActive(false);
+            isGame = false;
             nextLevelButton.gameObject.SetActive(true);
             if (currentLevelNum == levelManager.GetLevelNum())
             {
@@ -163,17 +181,19 @@ public class GameManager : MonoBehaviour
     {
         if (isGame)
         {
-            loseMessage.gameObject.SetActive(true);
-            restartButton.gameObject.SetActive(true);
             ammoCount.gameObject.SetActive(false);
             ammoImage.gameObject.SetActive(false);
             pauseGameButton.gameObject.SetActive(false);
-            backToMenu.gameObject.SetActive(true);
             isGame = false;
-            loseSound.Play();
-            gameMusic.Stop();
-            watchAdButton.gameObject.SetActive(true);
-            GameCountWithoutAd();
+            if (!isRewarded) StartCoroutine(LoseOffer());
+            else
+            {
+                loseMessage.gameObject.SetActive(true);
+                restartButton.gameObject.SetActive(true);
+                backToMenu.gameObject.SetActive(true);
+                gameMusic.Stop();
+                GameCountWithoutAd();
+            }
         }
     }
     public void RestartLevel()
@@ -182,6 +202,7 @@ public class GameManager : MonoBehaviour
         destroyedCount = 0;
         isGame = true;
         Time.timeScale = 1;
+        isRewarded = false;       
         GameCountWithoutAd();
     }
     public int DestroyCount(GameObject objectToDestroy)
@@ -211,8 +232,6 @@ public class GameManager : MonoBehaviour
         restartButton.gameObject.SetActive(false);
         pauseGameButton.gameObject.SetActive(true);
         loseMessage.gameObject.SetActive(false);
-        ammoCount.gameObject.SetActive(true);
-        ammoImage.gameObject.SetActive(true);
     }
     public IEnumerator DelayResume ()
     {
@@ -229,6 +248,7 @@ public class GameManager : MonoBehaviour
         int sceneNumber = SceneManager.GetActiveScene().buildIndex;
         sceneNumber++;
         SceneManager.LoadScene(sceneNumber);
+        isRewarded = false;
     }   
     private void LaserActivating()
     {
@@ -243,18 +263,32 @@ public class GameManager : MonoBehaviour
     }
     public void RewardForWatchingAd()
     {
-        if (shootCount==maxShootCount)
         {
-            shootCount--;
-            ResumeGame();
-        }
-        else
-        {
-            maxShootCount++;
+            isRewarded = true;
+            if (shootCount == maxShootCount)
+            {
+                StartCoroutine(DelayResume());
+                loseMessage.gameObject.SetActive(false);
+                restartButton.gameObject.SetActive(false);
+                screenFadeImage.gameObject.SetActive(false);
+                ammoCount.gameObject.SetActive(true);
+                ammoImage.gameObject.SetActive(true);
+                pauseGameButton.gameObject.SetActive(true);
+                backToMenu.gameObject.SetActive(false);
+                watchAdButton.gameObject.SetActive(false);
+                ammoCount.text = "1";
+                gameMusic.Play();
+                maxShootCount++;
+            }
+            else
+            {
+                maxShootCount++;
+            }
         }
     }
     private void GameCountWithoutAd()
     {
+        gamesWithoutAd = PlayerPrefs.GetInt(adCount);
         gamesWithoutAd++;
         if (gamesWithoutAd < 7)
         {
@@ -267,5 +301,27 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.Save();
             adManager.ShowStandartVideoAd();
         }
+    }
+    private IEnumerator LoseOffer()
+    {
+        if (!isRewarded)
+        {
+            screenFadeImage.gameObject.SetActive(true);
+            watchAdButton.gameObject.SetActive(true);
+            loseMessage.gameObject.SetActive(true);
+            loseSound.Play();
+            yield return new WaitForSeconds(3f);
+            if (!isRewarded)
+            {
+                screenFadeImage.gameObject.SetActive(false);
+                watchAdButton.gameObject.SetActive(false);
+                restartButton.gameObject.SetActive(true);
+                backToMenu.gameObject.SetActive(true);
+                gameMusic.Stop();
+                GameCountWithoutAd();
+            }
+        }
+
+
     }
 }
