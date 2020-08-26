@@ -10,6 +10,8 @@ public class AutoDestroy : MonoBehaviour
     private LaserDetector laserDetector = null;
     private AudioSource deathSound;
     private AudioSource bounceSound;
+    private AudioSource laserHit;
+    private AudioSource spikeHit;
     private int bounces = 0;
 
     private bool isSpiked = false;
@@ -19,6 +21,9 @@ public class AutoDestroy : MonoBehaviour
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         deathSound = GameObject.Find("Enemies").GetComponent<AudioSource>();
+
+        if(gameManager.currentLevelNum>=21)  laserHit = GameObject.Find("LaserSystem").GetComponent<AudioSource>();
+        if((gameManager.currentLevelNum>=11)||(gameManager.currentLevelNum<=20)) spikeHit = GameObject.Find("Spikes").GetComponent<AudioSource>();
         bounceSound = this.GetComponent<AudioSource>();
         if (PlayerPrefs.HasKey("effects"))
         {
@@ -68,6 +73,7 @@ public class AutoDestroy : MonoBehaviour
         {
             isSpiked = true;
             bounces = 0;
+            spikeHit.Play();
             if (gameManager.DestroyCount(this.gameObject) == gameManager.maxShootCount)
             {
                 if (gameManager.listOfEnemies.Count <= 0)
@@ -84,6 +90,7 @@ public class AutoDestroy : MonoBehaviour
         {
             isLasered = true;
             bounces = 0;
+            laserHit.Play();
             if (gameManager.DestroyCount(this.gameObject) == gameManager.maxShootCount)
             {
                 if (gameManager.listOfEnemies.Count <= 0)

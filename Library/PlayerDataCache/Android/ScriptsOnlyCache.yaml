@@ -30,6 +30,9 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
+    UnityEngine.Advertisements.dll:
+    - UnityEngine.Advertisements.Placeholder
+    - UnityEngine.Advertisements.Platform.Editor.BannerPlaceholder
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -3556,4 +3559,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Levels 21-30/Level28.unity
   - Assets/Scenes/Levels 21-30/Level29.unity
   - Assets/Scenes/Levels 21-30/Level30.unity
-  playerPath: C:/Users/doodl/Desktop/publishing/Bounce Killer.apk
+  playerPath: C:/Users/doodl/Desktop/publishing/Bounce Killer 1.0.2.apk
