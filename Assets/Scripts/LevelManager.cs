@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-
 public class LevelManager : MonoBehaviour
 {
     private string key = "levelNum";

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-
 public class VolumeSetuper : MonoBehaviour
 {
     private float effectsVolume;
