@@ -4940,6 +4940,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1539472761587561220, guid: d6dad903c793639469ad1a895c69b7d4, type: 3}
   m_PrefabInstance: {fileID: 1247479367}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &788563291 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3018064350097628719, guid: d6dad903c793639469ad1a895c69b7d4, type: 3}
+  m_PrefabInstance: {fileID: 1247479367}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1247479367
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4947,6 +4952,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 541169376178199165, guid: d6dad903c793639469ad1a895c69b7d4, type: 3}
+      propertyPath: Lasers
+      value: 
+      objectReference: {fileID: 788563291}
     - target: {fileID: 1616729523368626132, guid: d6dad903c793639469ad1a895c69b7d4, type: 3}
       propertyPath: m_Name
       value: World 21-30

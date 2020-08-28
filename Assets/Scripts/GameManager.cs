@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     private string adCount = "gamesWithoutAd";
 
     private LevelManager levelManager;
-    public int currentLevelNum;
+    private int currentLevelNum;
 
     private AudioSource loseSound;
     private AudioSource victorySound;
@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        currentLevelNum = SceneManager.GetActiveScene().buildIndex;
+
         isRewarded = false;
 
         StartCoroutine(DelayResume());
@@ -323,5 +325,9 @@ public class GameManager : MonoBehaviour
         }
 
 
+    }
+    public int GetCurrentLevelNum()
+    {
+        return currentLevelNum;
     }
 }

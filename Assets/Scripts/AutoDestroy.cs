@@ -22,8 +22,8 @@ public class AutoDestroy : MonoBehaviour
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         deathSound = GameObject.Find("Enemies").GetComponent<AudioSource>();
 
-        if(gameManager.currentLevelNum>=21)  laserHit = GameObject.Find("LaserSystem").GetComponent<AudioSource>();
-        if((gameManager.currentLevelNum>=11)&&(gameManager.currentLevelNum<=20)) spikeHit = GameObject.Find("Spikes").GetComponent<AudioSource>();
+        if(gameManager.GetCurrentLevelNum() >= 21)  laserHit = GameObject.Find("LaserSystem").GetComponent<AudioSource>();
+        if((gameManager.GetCurrentLevelNum() >= 11)&&(gameManager.GetCurrentLevelNum() <= 20)) spikeHit = GameObject.Find("Spikes").GetComponent<AudioSource>();
         bounceSound = this.GetComponent<AudioSource>();
         if (PlayerPrefs.HasKey("effects"))
         {

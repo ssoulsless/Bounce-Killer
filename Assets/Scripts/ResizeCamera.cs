@@ -11,11 +11,14 @@ public class ResizeCamera : MonoBehaviour
         _camera = gameObject.GetComponent<Camera>();
         x = Screen.width / 9;
         x = Screen.height / x;
-        x *= 120;
-        _camera.orthographicSize = x / 200;
-        if (_camera.orthographicSize >= 12 )
+        if (x >= 16)
         {
-            _camera.orthographicSize = 12;
+            x *= 120;
+            _camera.orthographicSize = x / 200;
+            if (_camera.orthographicSize >= 12)
+            {
+                _camera.orthographicSize = 12;
+            }
         }
     }
 }
