@@ -1903,6 +1903,14 @@ PrefabInstance:
       propertyPath: currentLevelNum
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 5808289774607513944, guid: 56b078e8554c219469061afd2f523278, type: 3}
+      propertyPath: maxShootCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808289774607513944, guid: 56b078e8554c219469061afd2f523278, type: 3}
+      propertyPath: maxBoundShoot
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6311451353576645433, guid: 56b078e8554c219469061afd2f523278, type: 3}
       propertyPath: m_LocalPosition.x
       value: 518

@@ -35,8 +35,6 @@ public class SceneNavigator : MonoBehaviour
         startMenu.SetActive(true);
         levelMenu.SetActive(false);
         settingsMenu.SetActive(false);
-        if (gameManager)
-        gameManager.isRewarded = false;
     }
     public void GoToSettingsMenu()
     {

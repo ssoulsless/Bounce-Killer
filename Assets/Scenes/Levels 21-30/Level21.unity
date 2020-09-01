@@ -4956,6 +4956,14 @@ PrefabInstance:
       propertyPath: Lasers
       value: 
       objectReference: {fileID: 788563291}
+    - target: {fileID: 541169376178199165, guid: d6dad903c793639469ad1a895c69b7d4, type: 3}
+      propertyPath: maxShootCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 541169376178199165, guid: d6dad903c793639469ad1a895c69b7d4, type: 3}
+      propertyPath: maxBoundShoot
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1616729523368626132, guid: d6dad903c793639469ad1a895c69b7d4, type: 3}
       propertyPath: m_Name
       value: World 21-30

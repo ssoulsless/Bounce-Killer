@@ -11,5 +11,6 @@ public class SettingsManager : MonoBehaviour
     {
         PlayerPrefs.SetFloat(effectsKey, effects.volume);
         PlayerPrefs.SetFloat(musicKey, music.volume);
+        PlayerPrefs.Save();
     }
 }

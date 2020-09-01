@@ -38,7 +38,7 @@ public class AutoDestroy : MonoBehaviour
             if (++bounces >= maxBounceCount)
             {
                 bounces = 0;
-                if (gameManager.DestroyCount(this.gameObject) == gameManager.maxShootCount)
+                if (gameManager.DestroyCount(this.gameObject) >= gameManager.maxShootCount)
                 {
                     if (gameManager.listOfEnemies.Count <= 0)
                     {
@@ -74,7 +74,7 @@ public class AutoDestroy : MonoBehaviour
             isSpiked = true;
             bounces = 0;
             spikeHit.Play();
-            if (gameManager.DestroyCount(this.gameObject) == gameManager.maxShootCount)
+            if (gameManager.DestroyCount(this.gameObject) >= gameManager.maxShootCount)
             {
                 if (gameManager.listOfEnemies.Count <= 0)
                 {
@@ -91,7 +91,7 @@ public class AutoDestroy : MonoBehaviour
             isLasered = true;
             bounces = 0;
             laserHit.Play();
-            if (gameManager.DestroyCount(this.gameObject) == gameManager.maxShootCount)
+            if (gameManager.DestroyCount(this.gameObject) >= gameManager.maxShootCount)
             {
                 if (gameManager.listOfEnemies.Count <= 0)
                 {

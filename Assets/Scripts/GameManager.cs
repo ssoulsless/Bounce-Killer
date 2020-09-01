@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
     public bool isGame = false;
     public bool isLast = false;
     public int maxShootCount = 5;
+    public int maxBoundShoot = 6;
     public bool isRewarded;
 
     public List<GameObject> listOfEnemies = new List<GameObject>();
@@ -68,7 +69,9 @@ public class GameManager : MonoBehaviour
 
         isRewarded = false;
 
-        StartCoroutine(DelayResume());
+
+
+    StartCoroutine(DelayResume());
 
         if (PlayerPrefs.HasKey(adCount)) gamesWithoutAd = PlayerPrefs.GetInt(adCount);
         else { gamesWithoutAd = 0; PlayerPrefs.SetInt(adCount, gamesWithoutAd); PlayerPrefs.Save(); }
@@ -106,18 +109,18 @@ public class GameManager : MonoBehaviour
             {
                 Touch _touch;
                 _touch = Input.GetTouch(0);
-                preDirection.SetPosition(0, startThrowingPosition.position); 
+                preDirection.SetPosition(0, startThrowingPosition.position);
                 if (_touch.phase == TouchPhase.Began)
                 {
                     startTouchPos = _touch.position;
+                    preDirection.SetPosition(1, startThrowingPosition.position);
                 }
                 if (_touch.phase == TouchPhase.Moved) 
                 {
                     endTouchPos = _touch.position;
-                    if (!((endTouchPos.x >= maxXValue && endTouchPos.y > maxYValue) || (startTouchPos.x >= maxXValue && startTouchPos.y >= maxYValue)))
+                    if (!(((endTouchPos.x >= maxXValue) && (endTouchPos.y > maxYValue)) || ((startTouchPos.x >= maxXValue) && (startTouchPos.y >= maxYValue))))
                     {
-                        deltaPos = endTouchPos - startTouchPos;
-                        deltaPos.Normalize();
+                        deltaPos = (_touch.position - startTouchPos).normalized;
                         preDirection.SetPosition(1, startThrowingPosition.position + new Vector3(deltaPos.x * size, deltaPos.y * size, 0));
                     }
                     else
@@ -170,7 +173,7 @@ public class GameManager : MonoBehaviour
     }
     public void Shoot(Vector2 direction, int shootCount)
     {
-         if (shootCount <= maxShootCount && isGame)
+         if ((shootCount <= maxShootCount) && (isGame))
          {
             ammoCount.text = (maxShootCount - shootCount).ToString();
             clone = Instantiate(projectilePrefab, startThrowingPosition.position, startThrowingPosition.rotation) as GameObject;
@@ -194,6 +197,7 @@ public class GameManager : MonoBehaviour
                 restartButton.gameObject.SetActive(true);
                 backToMenu.gameObject.SetActive(true);
                 gameMusic.Stop();
+                maxShootCount--;
                 GameCountWithoutAd();
             }
         }
@@ -202,7 +206,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         destroyedCount = 0;
-        isGame = true;
+        StartCoroutine(DelayResume());
         Time.timeScale = 1;
         isRewarded = false;       
         GameCountWithoutAd();
@@ -224,6 +228,7 @@ public class GameManager : MonoBehaviour
         restartButton.gameObject.SetActive(true);
         Time.timeScale = 0;
         pauseGameButton.gameObject.SetActive(false);
+        preDirection.SetPosition(1, startThrowingPosition.position);
     }
     public void ResumeGame()
     {
@@ -265,28 +270,20 @@ public class GameManager : MonoBehaviour
     }
     public void RewardForWatchingAd()
     {
-        {
             isRewarded = true;
-            if (shootCount == maxShootCount)
-            {
-                StartCoroutine(DelayResume());
-                loseMessage.gameObject.SetActive(false);
-                restartButton.gameObject.SetActive(false);
-                screenFadeImage.gameObject.SetActive(false);
-                ammoCount.gameObject.SetActive(true);
-                ammoImage.gameObject.SetActive(true);
-                pauseGameButton.gameObject.SetActive(true);
-                backToMenu.gameObject.SetActive(false);
-                watchAdButton.gameObject.SetActive(false);
-                ammoCount.text = "1";
-                gameMusic.Play();
-                maxShootCount++;
-            }
-            else
-            {
-                maxShootCount++;
-            }
-        }
+            StartCoroutine(DelayResume());
+            loseMessage.gameObject.SetActive(false);
+            restartButton.gameObject.SetActive(false);
+            screenFadeImage.gameObject.SetActive(false);
+            ammoCount.gameObject.SetActive(true);
+            ammoImage.gameObject.SetActive(true);
+            pauseGameButton.gameObject.SetActive(true);
+            backToMenu.gameObject.SetActive(false);
+            watchAdButton.gameObject.SetActive(false);
+            maxShootCount = 1;
+            shootCount = 0;
+            ammoCount.text = (maxShootCount - shootCount).ToString();
+            gameMusic.Play();
     }
     private void GameCountWithoutAd()
     {
@@ -323,8 +320,15 @@ public class GameManager : MonoBehaviour
                 GameCountWithoutAd();
             }
         }
-
-
+        else
+        {
+            screenFadeImage.gameObject.SetActive(false);
+            watchAdButton.gameObject.SetActive(false);
+            restartButton.gameObject.SetActive(true);
+            backToMenu.gameObject.SetActive(true);
+            gameMusic.Stop();
+            GameCountWithoutAd();
+        }
     }
     public int GetCurrentLevelNum()
     {

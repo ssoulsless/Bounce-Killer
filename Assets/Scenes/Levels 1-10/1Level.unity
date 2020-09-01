@@ -138,6 +138,14 @@ PrefabInstance:
       propertyPath: deathParticles
       value: 
       objectReference: {fileID: 2128333838743090369}
+    - target: {fileID: 2128333838741032642, guid: 7ea84242294354b4b8b3bfcb97be3b90, type: 3}
+      propertyPath: maxShootCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2128333838741032642, guid: 7ea84242294354b4b8b3bfcb97be3b90, type: 3}
+      propertyPath: maxBoundShoot
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6311451353576645433, guid: 7ea84242294354b4b8b3bfcb97be3b90, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -9782,6 +9782,14 @@ PrefabInstance:
       propertyPath: maxShootCount
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3879519514792646261, guid: cb100e545ef696746bca9066941fd184, type: 3}
+      propertyPath: maxShootCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3879519514792646261, guid: cb100e545ef696746bca9066941fd184, type: 3}
+      propertyPath: maxBoundShoot
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6311451353576645433, guid: cb100e545ef696746bca9066941fd184, type: 3}
       propertyPath: m_LocalPosition.x
       value: 518
